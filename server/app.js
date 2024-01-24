@@ -1,7 +1,8 @@
 import express from "express";
+import cors from "cors";
 import { createPool } from "mysql2/promise";
-const PORT = process.env.PORT || 3000
 
+const PORT = process.env.PORT || 3000;
 
 const DB_HOST = process.env.DB_HOST || "localhost";
 const DB_USER = process.env.DB_USER || "root";
@@ -19,15 +20,24 @@ const pool = createPool({
 
 const app = express();
 
+// Agregar middleware para manejar CORS
+app.use(cors());
+
 app.get("/", (req, res) => {
-  res.send("bienvenidoa l servidor");
+  res.send("bienvenido al servidor");
 });
 
 app.get("/get", async (req, res) => {
-  const [result] = await pool.query("SELECT * FROM empleados");
-  console.log(result);
-  res.json(result[0]);
+  try {
+    const [result] = await pool.query("SELECT * FROM empleados");
+    console.log(result);
+    res.json(result[0]);
+  } catch (error) {
+    console.error("Error al obtener datos:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-app.listen(PORT);
-console.log("conectado el puerto 3000");
+app.listen(PORT, () => {
+  console.log(`Servidor conectado en el puerto ${PORT}`);
+});

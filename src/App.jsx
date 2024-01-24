@@ -5,15 +5,24 @@ function App() {
   const [empleados, setEmpleados] = useState([]);
 
   const url = "https://fullstack-deploy-production.up.railway.app";
+  
   const obtener = async () => {
-    const respuesta = await fetch(`${url}/get`);
-    const data = respuesta.json;
-    setEmpleados(data);
+    try {
+      const respuesta = await fetch(`${url}/get`);
+      
+      // Aquí es donde debes invocar la función json()
+      const data = await respuesta.json();
+      
+      setEmpleados(data);
+    } catch (error) {
+      console.error("Error al obtener datos:", error);
+    }
   };
 
   useEffect(() => {
     obtener();
   }, []);
+
   return (
     <>
       <h1>buenas</h1>
