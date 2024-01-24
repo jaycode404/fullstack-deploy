@@ -1,6 +1,12 @@
 import express from "express";
 import { createPool } from "mysql2/promise";
+const app = express();
+app.use(cors)
+
+
 const PORT = process.env.PORT || 3000
+
+
 const DB_HOST = process.env.DB_HOST || "localhost";
 const DB_USER = process.env.DB_USER || "root";
 const DB_PASSWORD = process.env.DB_PASSWORD || "root";
@@ -15,13 +21,12 @@ const pool = createPool({
   database: DB_NAME,
 });
 
-const app = express();
 
 app.get("/", (req, res) => {
   res.send("bienvenidoa l servidor");
 });
 
-app.get("/ping", async (req, res) => {
+app.get("/get", async (req, res) => {
   const [result] = await pool.query("SELECT * FROM empleados");
   console.log(result);
   res.json(result[0]);

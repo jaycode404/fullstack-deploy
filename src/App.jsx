@@ -1,17 +1,33 @@
-import { useState } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import "./App.css";
 
 function App() {
-  // const [empleados, setEmpleados] = useState([])
+  const [empleados, setEmpleados] = useState([]);
 
-  // const obtener = async () => {
-  //   const respuesta = await fetch()
-  // }
+  const url = "https://fullstack-deploy-production.up.railway.app";
+  const obtener = async () => {
+    const respuesta = await fetch(`${url}/get`);
+    const data = respuesta.json;
+    setEmpleados(data);
+  };
+
+  useEffect(() => {
+    obtener();
+  }, []);
   return (
     <>
-      <h1>hola</h1>
+      <h1>buenas</h1>
+      <div>
+        {empleados.map((empleado) => {
+          return (
+            <div key={empleado.id}>
+              <p>{empleado.nombre}</p>
+            </div>
+          );
+        })}
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
