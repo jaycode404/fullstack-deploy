@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 import { createPool } from "mysql2/promise";
+import ReactDOMServer from "react-dom/server";
+import React from "react";
+import { StaticRouter } from "react-router-dom";
+import App from "./path/to/your/ReactComponent"; // Importa tu componente React aquí
 
 const PORT = process.env.PORT || 3000;
 
@@ -36,7 +40,26 @@ app.get("/get", async (req, res) => {
   try {
     const [result] = await pool.query("SELECT * FROM empleados");
     console.log(result);
-    res.json(result[0]);
+
+    // Renderizar el componente React en el servidor
+    const reactApp = ReactDOMServer.renderToString(
+      <StaticRouter location={req.url} context={{}}>
+        <App data={result[0]} /> {/* Pasa los datos al componente React */}
+      </StaticRouter>
+    );
+
+    // Enviar la respuesta HTML generada al cliente
+    res.send(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>React App</title>
+        </head>
+        <body>
+          <div id="app">${reactApp}</div>
+        </body>
+      </html>
+    `);
   } catch (error) {
     console.error("Error al obtener datos:", error);
     res.status(500).json({ error: "Internal Server Error" });
