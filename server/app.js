@@ -1,9 +1,5 @@
 import express from "express";
 import { createPool } from "mysql2/promise";
-const app = express();
-app.use(cors)
-
-
 const PORT = process.env.PORT || 3000
 
 
@@ -21,6 +17,7 @@ const pool = createPool({
   database: DB_NAME,
 });
 
+const app = express();
 
 app.get("/", (req, res) => {
   res.send("bienvenidoa l servidor");
