@@ -10,7 +10,6 @@ function App() {
     try {
       const respuesta = await fetch(`${url}/get`);
       
-      // Aquí es donde debes invocar la función json()
       const data = await respuesta.json();
       
       setEmpleados(data);
