@@ -20,7 +20,7 @@ const pool = createPool({
 
 const app = express();
 app.use(cors({
-  origin: "https://main--musical-otter-ec6469.netlify.app",
+  origin: "https://musical-otter-ec6469.netlify.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true, // Si necesitas permitir credenciales en las solicitudes
 }));
