@@ -28,9 +28,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", (req, res) => {
-  res.send("bienvenido al servidor");
-});
+// app.get("/", (req, res) => {
+//   res.send("bienvenido al servidor");
+// });
 
 app.get("/get", async (req, res) => {
   try {
