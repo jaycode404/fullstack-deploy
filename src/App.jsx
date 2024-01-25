@@ -18,6 +18,7 @@ function App() {
       console.error("Error al obtener datos:", error);
     }
   };
+  
 
   useEffect(() => {
     obtener();
