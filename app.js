@@ -19,18 +19,15 @@ const pool = createPool({
 });
 
 const app = express();
+app.use(cors({
+  origin: "https://main--musical-otter-ec6469.netlify.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Si necesitas permitir credenciales en las solicitudes
+}));
 
-// Agregar middleware para manejar CORS
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin: *");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
+app.get("/", (req, res) => {
+  res.send("bienvenido al servidor");
 });
-
-// app.get("/", (req, res) => {
-//   res.send("bienvenido al servidor");
-// });
 
 app.get("/get", async (req, res) => {
   try {
