@@ -21,11 +21,13 @@ const startServer = async () => {
 
   const app = express();
 
-  app.use(cors({
-    origin: "https://empleadoscurd.netlify.app/",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  }));
+  app.use(
+    cors({
+      origin: "https://empleadoscurd.netlify.app",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true,
+    })
+  );
 
   app.get("/", (req, res) => {
     res.send("bienvenido al servidor");
