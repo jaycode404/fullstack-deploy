@@ -27,13 +27,13 @@ function App() {
     <>
       <h1>buenas</h1>
       <div>
-        {empleados.map((empleado) => {
+        {/* {empleados.map((empleado) => {
           return (
             <div key={empleado.id}>
               <p>{empleado.nombre}</p>
             </div>
           );
-        })}
+        })} */}
       </div>
     </>
   );
