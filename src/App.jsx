@@ -13,6 +13,7 @@ function App() {
       const data = await respuesta.json();
       
       setEmpleados(data);
+      console.log(empleados)
     } catch (error) {
       console.error("Error al obtener datos:", error);
     }
