@@ -33,7 +33,7 @@ app.get("/get", async (req, res) => {
   try {
     const [result] = await pool.query("SELECT * FROM empleados");
     console.log(result);
-    res.json(result[0]);
+    res.json(result[0].json());
   } catch (error) {
     console.error("Error al obtener datos:", error);
     res.status(500).json({ error: "Internal Server Error" });
